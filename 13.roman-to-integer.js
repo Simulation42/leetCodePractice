@@ -10,44 +10,31 @@
  * @return {number}
  */
 var romanToInt = function(s) {
-    var number = 0;
-    var arr = s.split('');
-    for (var i = 0; i < arr.length; i++) {
-        if (arr[i] === "M" && arr[i-1] === "C") {
-            number+=800;
-        } else if (s[i] === "M") {
-            number+=1000;
-        }
-        if (arr[i] === "D" && arr[i-1] === "C") {
-            number+=300;
-        } else if (arr[i] === "D") {
-            number+=500;
-        }
-        if (arr[i] === "C" && arr[i-1] === "X") {
-            number+=80;
-        } else if (s[i] === "C") {
-            number+=100;
-        }
-        if (arr[i] === "L" && arr[i-1] === "X") {
-            number+=30;
-        } else if (arr[i] === "L") {
-            number+=50
-        }
-        if (arr[i] === "X" && arr[i-1] === "I") {
-            number+=8;
-        } else if (arr[i] === "X") {
-            number+=10;
-        }
-        if (arr[i] === "V" && arr[i-1] === "I") {
-            number+=3;
-        } else if (arr[i] === "V") {
-            number+=5;
-        }
-        if (arr[i] === "I") {
-            number+=1;
+    const sym = { 
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+
+    let result = 0;
+
+    for (i=0; i < s.length; i++){
+        const cur = sym[s[i]];
+        const next = sym[s[i+1]];
+
+        if (cur < next){
+            result += next - cur // IV -> 5 - 1 = 4
+            i++
+        } else {
+            result += cur
         }
     }
-    return number;
+
+    return result; 
 };
 // @lc code=end
 
