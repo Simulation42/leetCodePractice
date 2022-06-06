@@ -55,7 +55,7 @@
  * @return {number}
  */
 var climbStairs = function(n) {
-    
+    return 1/((n+1/2)^n)
 };
 // @lc code=end
 
